@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Account Creation</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .header {
+            background: #0d2b45;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .form-box {
+            background: white;
+            padding: 30px;
+            width: 500px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-box h2 {
+            text-align: center;
+            color: #0d2b45;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input:focus {
+            border-color: #0d2b45;
+            outline: none;
+        }
+
+        .btn {
+            background: #0d2b45;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .btn:hover {
+            background: #163a5f;
+        }
+
+        .msg {
+            text-align: center;
+            color: green;
+            margin-bottom: 10px;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="header">
+    ACCOUNT CREATION
+</div>
+
+<div class="container">
+    <div class="form-box">
+
+        <h2>Create New Account</h2>
+
+        <div class="msg">{{ msg }}</div>
+
+        <form action="{% url 'accountcreate' %}" method="post">
+            {% csrf_token %}
+
+            <table>
+
+                <tr>
+                    <td>Customer ID</td>
+                    <td><input type="number" name="cid" required></td>
+                </tr>
+
+                <tr>
+                    <td>Name</td>
+                    <td><input type="text" name="cname" required></td>
+                </tr>
+
+                <tr>
+                    <td>Account Number</td>
+                    <td><input type="text" name="cacc" required></td>
+                </tr>
+
+                <tr>
+                    <td>Email</td>
+                    <td><input type="email" name="cemail" required></td>
+                </tr>
+
+                <tr>
+                    <td>Phone</td>
+                    <td><input type="text" name="cphone" required></td>
+                </tr>
+
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" name="pwd" required></td>
+                </tr>
+
+                <tr>
+                    <td>Address</td>
+                    <td><input type="text" name="cadd" required></td>
+                </tr>
+
+                <tr>
+                    <td>Date of Birth</td>
+                    <td><input type="date" name="cdob" required></td>
+                </tr>
+
+                <tr>
+                    <td>Initial Balance</td>
+                    <td><input type="number" name="cbal"></td>
+                </tr>
+
+            </table>
+
+            <br>
+            <button type="submit" class="btn">REGISTER</button>
+
+        </form>
+
+    </div>
+</div>
+
+</body>
+</html>

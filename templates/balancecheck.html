@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Balance Check</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .header {
+            background: #0d2b45;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px 20px;
+        }
+
+        .topbar a {
+            text-decoration: none;
+            background: #d9534f;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: white;
+            width: 500px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #0d2b45;
+        }
+
+        h3 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input[readonly] {
+            background: #f0f0f0;
+        }
+
+        .btn {
+            background: #0d2b45;
+            color: white;
+            padding: 10px;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #163a5f;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="header">
+    BANK BALANCE CHECK
+</div>
+
+<div class="topbar">
+    <a href="{% url 'home' %}">LOGOUT</a>
+</div>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Balance Inquiry</h2>
+        <h3>Hi {{ e1.cname }}</h3>
+
+        <form method="post" action="{% url 'balancecheck' %}">
+            {% csrf_token %}
+
+            <table>
+
+                <tr>
+                    <td>Customer ID</td>
+                    <td><input type="number" name="cid" value="{{ e1.cid }}"></td>
+                </tr>
+
+                <tr>
+                    <td>Account Number</td>
+                    <td><input type="text" name="cacc" value="{{ e1.accountnumber }}"></td>
+                </tr>
+
+                <tr>
+                    <td>Customer Name</td>
+                    <td><input type="text" name="cname" value="{{ e1.cname }}"></td>
+                </tr>
+
+                <tr>
+                    <td>Balance</td>
+                    <td><input type="number" name="cbal" value="{{ e1.balance }}" readonly></td>
+                </tr>
+
+            </table>
+
+            <br>
+            <button type="submit" class="btn">CHECK BALANCE</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

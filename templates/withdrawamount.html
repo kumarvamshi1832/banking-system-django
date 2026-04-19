@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Withdraw Amount</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .header {
+            background: #0d2b45;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: white;
+            width: 450px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #0d2b45;
+        }
+
+        .info {
+            text-align: center;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+        }
+
+        td {
+            padding: 10px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input:focus {
+            border-color: #0d2b45;
+            outline: none;
+        }
+
+        .btn {
+            background: #dc3545;
+            color: white;
+            padding: 10px;
+            width: 100%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #c82333;
+        }
+
+        .msg {
+            text-align: center;
+            color: red;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .balance {
+            color: green;
+            font-size: 14px;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="header">
+    WITHDRAW FUNDS
+</div>
+<div class="topbar">
+    <a href="{% url 'home' %}">LOGOUT</a>
+</div>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Withdraw Amount</h2>
+
+        <div class="info">
+            <h3>Name: {{ e1.cname }}</h3>
+            <h3 class="balance">Balance: {{ e1.balance }}</h3>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="msg">{{ msg }}</div>
+
+            <table>
+
+                <tr>
+                    <td>Customer ID</td>
+                    <td>
+                        <input type="number" name="cid" required>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Amount</td>
+                    <td>
+                        <input type="number" name="amount" placeholder="Enter amount" required>
+                    </td>
+                </tr>
+
+            </table>
+
+            <br>
+
+            <button type="submit" class="btn">WITHDRAW</button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

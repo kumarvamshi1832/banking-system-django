@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .header {
+            background: #0d2b45;
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h2 {
+            margin: 0;
+        }
+
+        .user {
+            font-size: 16px;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card a {
+            text-decoration: none;
+            color: #0d2b45;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .card a:hover {
+            color: #163a5f;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="header">
+    <h2>BANK DASHBOARD</h2>
+    <div class="user">Hi {{ uname }}</div>
+</div>
+<div class="topbar">
+    <a href="{% url 'home' %}">LOGOUT</a>
+</div>
+
+<div class="container">
+
+    <div class="dashboard">
+
+        <div class="card">
+            <a href="{% url 'balancecheck' %}">Balance Enquiry</a>
+        </div>
+
+        <div class="card">
+            <a href="{% url 'depositamount' %}">Deposit Amount</a>
+        </div>
+
+        <div class="card">
+            <a href="{% url 'withdrawamount' %}">Withdraw Amount</a>
+        </div>
+
+        <div class="card">
+            <a href="{% url 'transferamount' %}">Transfer Amount</a>
+        </div>
+
+        <div class="card">
+            <a href="{% url 'transactionhistory' %}">Transaction History</a>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

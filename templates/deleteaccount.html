@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Delete Account</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .header {
+            background: #0d2b45;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 80px;
+        }
+
+        .card {
+            background: white;
+            width: 400px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        h2 {
+            color: #0d2b45;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        input:focus {
+            border-color: #0d2b45;
+            outline: none;
+        }
+
+        .btn {
+            background: #d9534f;
+            color: white;
+            padding: 10px;
+            width: 95%;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #c9302c;
+        }
+
+        .msg {
+            margin-top: 15px;
+            color: green;
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+<body>
+
+<div class="header">
+    DELETE BANK ACCOUNT
+</div>
+<div class="topbar">
+    <a href="{% url 'home' %}">LOGOUT</a>
+</div>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Account Deletion</h2>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <input type="number" name="cid" placeholder="Enter Customer ID" required>
+
+            <br>
+
+            <button type="submit" class="btn">DELETE ACCOUNT</button>
+        </form>
+
+        <div class="msg">
+            {{ msg }}
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

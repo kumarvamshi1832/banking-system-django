@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction History</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f9;
+        }
+
+        .header {
+            background: #0d2b45;
+            color: white;
+            padding: 18px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .card {
+            background: white;
+            width: 90%;
+            max-width: 1000px;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            text-align: center;
+            color: #0d2b45;
+        }
+
+        .info {
+            text-align: center;
+            margin-bottom: 15px;
+            color: #333;
+        }
+
+        input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            width: 200px;
+        }
+
+        .btn {
+            background: #0d2b45;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: #163a5f;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background: #0d2b45;
+            color: white;
+        }
+
+        tr:hover {
+            background: #f1f1f1;
+        }
+
+        .msg {
+            text-align: center;
+            color: red;
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+<body>
+
+<div class="header">
+    TRANSACTION HISTORY
+</div>
+<div class="topbar">
+    <a href="{% url 'home' %}">LOGOUT</a>
+</div>
+
+<div class="container">
+
+    <div class="card">
+
+        <h2>Account Statement</h2>
+
+        <div class="info">
+            <h3>Name: {{ e1.cname }}</h3>
+            <h3>Account: {{ e1.accountnumber }}</h3>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+
+            <div class="msg">{{ msg }}</div>
+
+            <div style="text-align:center; margin-bottom: 15px;">
+                <input type="number" name="cid" placeholder="Enter Customer ID" required>
+                <button type="submit" class="btn">View</button>
+            </div>
+
+            <table>
+
+                <tr>
+                    <th>Amount</th>
+                    <th>Type</th>
+                    <th>Date & Time</th>
+                    <th>From Account</th>
+                    <th>To Account</th>
+                </tr>
+
+                {% for i in data %}
+                <tr>
+                    <td>{{ i.amount }}</td>
+                    <td>
+                        {% if i.from_account_id == e1.cid %}
+                        Sent
+                        {% elif i.to_account_id == e1.cid %}
+                        Received
+                        {% endif %}
+                    </td>
+                    <td>{{ i.created_at }}</td>
+                    <td>{{ i.from_account_id }}</td>
+                    <td>{{ i.to_account_id }}</td>
+                </tr>
+                {% endfor %}
+
+            </table>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>
