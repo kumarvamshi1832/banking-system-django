@@ -109,7 +109,9 @@ def transferamount(request):
                         receiver.balance += amount
                         sender.save()
                         receiver.save()
-                        Transaction.objects.create(from_account=sender,to_account=receiver,amount=amount,transaction_type='transfer')
+                        Transaction.objects.create(from_account=sender,to_account=receiver,amount=amount,transaction_type='debit')
+                        Transaction.objects.create(from_account=receiver,to_account=sender ,amount=amount,transaction_type='credit')
+
                         return render(request,'transferamount.html',
                                                      {'e1': sender,
                                                              'e2': receiver,
@@ -140,7 +142,7 @@ def transactionhistory(request):
             res = Bank.objects.filter(cid=a).first()
             if res:
                 transactions = Transaction.objects.filter(
-                    Q(from_account=res) | Q(to_account=res)
+                    from_account=res
                 ).order_by('-created_at')
                 return render(request, 'transactionhistory.html', {
                     'e1': res,

@@ -139,13 +139,18 @@
                 {% for i in data %}
                 <tr>
                     <td>{{ i.amount }}</td>
-                    <td>
-                        {% if i.from_account_id == e1.cid %}
-                        Sent
-                        {% elif i.to_account_id == e1.cid %}
-                        Received
-                        {% endif %}
-                    </td>
+            <td>
+                {% if i.transaction_type == 'debit' %}
+                Sent
+                {% elif i.transaction_type == 'credit' %}
+                Received
+                {% elif i.transaction_type == 'deposit' %}
+                Deposited
+                {% elif i.transaction_type == 'withdraw' %}
+                Withdrawn
+                {% endif %}
+            </td>
+
                     <td>{{ i.created_at }}</td>
                     <td>{{ i.from_account_id }}</td>
                     <td>{{ i.to_account_id }}</td>
