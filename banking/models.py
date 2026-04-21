@@ -7,7 +7,7 @@ class Bank(models.Model):
     accountnumber=models.IntegerField()
     email=models.EmailField(unique=True)
     phoneno=models.CharField(max_length=10)
-    password=models.CharField(max_length=20)
+    password=models.CharField(max_length=225)
     address=models.TextField()
     dob=models.DateField()
     balance = models.FloatField(default=0)

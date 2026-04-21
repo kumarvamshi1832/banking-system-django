@@ -28,5 +28,7 @@ urlpatterns = [
     path('transactionhistory/', views.transactionhistory, name='transactionhistory'),
     path('transferamount/', views.transferamount, name='transferamount'),
     path('withdrawamount/', views.withdrawamount, name='withdrawamount'),
-    path('deleteaccount/', views.deleteaccount, name='deleteaccount')
+    path('deleteaccount/', views.deleteaccount, name='deleteaccount'),
+    path('test-email/', views.test_email),
+    path('verify_otp/', views.verify_otp, name='verify_otp'),
 ]
