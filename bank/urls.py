@@ -32,4 +32,5 @@ urlpatterns = [
     path('deleteaccount/', views.deleteaccount, name='deleteaccount'),
     path('test-email/', views.test_email),
     path('verify_otp/', views.verify_otp, name='verify_otp'),
+    path('forgot/', views.forgot, name='forgot'),
 ]

@@ -83,16 +83,23 @@ def accountcreate(request):
         b = request.POST.get('cname')
         c = request.POST.get('cacc')
         d = request.POST.get('cemail')
+        if not d.endswith("@gmail.com"):
+            return render(request, 'accountcreate.html', {'msg2':'enter a valid email id'})
         e = request.POST.get('cphone')
+
+        if len(e) != 10:
+            return render(request, 'accountcreate.html', {
+                'msg1': "Enter valid 10-digit phone number"
+            })
         f = request.POST.get('pwd')
         g = request.POST.get('cadd')
         h = request.POST.get('cdob')
         i = request.POST.get('cbal')
         if Bank.objects.filter(accountnumber=c).exists():
-            return render(request, 'accountcreate.html', {'msg': "account already exist"})
-
+            return render(request, 'accountcreate.html', {
+                'msg': "Account already exists"
+            })
         otp = generate_otp()
-
         request.session['otp'] = otp
         request.session['otp_time'] = time.time()
         request.session['user_data'] = {
@@ -106,7 +113,6 @@ def accountcreate(request):
             'dob': h,
             'balance': i
         }
-
         send_mail(
             'OTP Verification',
             f'Your OTP is {otp}',
@@ -114,9 +120,7 @@ def accountcreate(request):
             [d],
             fail_silently=False,
         )
-
         return redirect('verify_otp')
-
     return render(request, 'accountcreate.html')
 
 def welcome(request):
@@ -247,3 +251,22 @@ def deleteaccount(request):
                 'msg': 'No such account'
             })
     return render(request, 'deleteaccount.html')
+
+def forgot(request):
+    if request.method == 'POST':
+        cid=request.POST.get('cid')
+        res=Bank.objects.filter(cid=cid)
+        if res:
+            a=request.POST.get('pwd1')
+            b=request.POST.get('pwd2')
+            if a==b:
+                res.update(password=make_password(a))
+                return render(request, "forgot.html",
+                              {"msg": "Successfully Changed Password"})
+            else:
+                return render(request, "forgot.html",
+                              {"msg": "Check The Password You Entered "})
+        else:
+            return render(request, "forgot.html",
+                          {"msg": "User does not exist"})
+    return render(request, 'forgot.html')

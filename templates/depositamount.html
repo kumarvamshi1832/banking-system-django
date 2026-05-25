@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Deposit Amount</title>
+    <title>Dashboard</title>
 
     <style>
         body {
@@ -15,77 +14,52 @@
         .header {
             background: #0d2b45;
             color: white;
-            padding: 18px;
-            text-align: center;
-            font-size: 24px;
-            font-weight: bold;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h2 {
+            margin: 0;
+        }
+
+        .user {
+            font-size: 16px;
         }
 
         .container {
-            display: flex;
-            justify-content: center;
-            margin-top: 40px;
+            padding: 30px;
+        }
+
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
         }
 
         .card {
             background: white;
-            width: 450px;
             padding: 25px;
             border-radius: 10px;
+            text-align: center;
             box-shadow: 0px 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
         }
 
-        h2 {
-            text-align: center;
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card a {
+            text-decoration: none;
             color: #0d2b45;
-        }
-
-        .info {
-            text-align: center;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        table {
-            width: 100%;
-        }
-
-        td {
-            padding: 10px;
-        }
-
-        input {
-            width: 100%;
-            padding: 8px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
-
-        input:focus {
-            border-color: #0d2b45;
-            outline: none;
-        }
-
-        .btn {
-            background: #28a745;
-            color: white;
-            padding: 10px;
-            width: 100%;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            font-size: 18px;
             font-weight: bold;
         }
 
-        .btn:hover {
-            background: #218838;
-        }
-
-        .msg {
-            text-align: center;
-            color: green;
-            font-weight: bold;
-            margin-bottom: 10px;
+        .card a:hover {
+            color: #163a5f;
         }
 
     </style>
@@ -94,7 +68,8 @@
 <body>
 
 <div class="header">
-    DEPOSIT FUNDS
+    <h2>BANK DASHBOARD</h2>
+    <div class="user">Hi {{ uname }}</div>
 </div>
 <div class="topbar">
     <a href="{% url 'home' %}">LOGOUT</a>
@@ -102,38 +77,27 @@
 
 <div class="container">
 
-    <div class="card">
+    <div class="dashboard">
 
-        <h2>Deposit Amount</h2>
-
-        <div class="info">
-            <h3>Welcome {{ e1.cname }}</h3>
-            <h3>Current Balance: {{ e1.balance }}</h3>
+        <div class="card">
+            <a href="{% url 'balancecheck' %}">Balance Enquiry</a>
         </div>
 
-        <form method="post">
-            {% csrf_token %}
+        <div class="card">
+            <a href="{% url 'depositamount' %}">Deposit Amount</a>
+        </div>
 
-            <div class="msg">{{ msg }}</div>
+        <div class="card">
+            <a href="{% url 'withdrawamount' %}">Withdraw Amount</a>
+        </div>
 
-            <table>
+        <div class="card">
+            <a href="{% url 'transferamount' %}">Transfer Amount</a>
+        </div>
 
-<!--                <tr>-->
-<!--                    <td>Customer ID</td>-->
-<!--                    <td><input type="number" name="cid" required></td>-->
-<!--                </tr>-->
-
-                <tr>
-                    <td>Amount</td>
-                    <td><input type="number" name="amount" placeholder="Enter amount" required></td>
-                </tr>
-
-            </table>
-
-            <br>
-            <button type="submit" class="btn">DEPOSIT</button>
-
-        </form>
+        <div class="card">
+            <a href="{% url 'transactionhistory' %}">Transaction History</a>
+        </div>
 
     </div>
 

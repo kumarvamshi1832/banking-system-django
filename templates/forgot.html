@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Forgot Password</title>
 </head>
 <body>
-$END$
+
+<form method="post">
+
+    {% csrf_token %}
+
+    {% if msg == "Successfully Changed Password" %}
+
+        {{ msg }}
+
+        <a href="/user_login/">
+            <button type="button">Login</button>
+        </a>
+
+    {% else %}
+
+        {{ msg }}
+
+        <br><br>
+
+        Enter User Id:
+        <input type="number" name="cid">
+
+        <br><br>
+
+        Enter New Password:
+        <input type="password" name="pwd1">
+
+        <br><br>
+
+        Enter Confirm Password:
+        <input type="password" name="pwd2">
+
+        <br><br>
+
+        <button type="submit">Submit</button>
+
+    {% endif %}
+
+</form>
+
 </body>
 </html>

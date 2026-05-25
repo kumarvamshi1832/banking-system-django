@@ -118,14 +118,24 @@
                 </tr>
 
                 <tr>
-                    <td>Email</td>
-                    <td><input type="email" name="cemail" required></td>
-                </tr>
+    <td>Email</td>
+    <td>
+        <input type="email" name="cemail" required>
+        {% if msg2 %}
+            <div style="color:red; font-size:13px;">{{ msg2 }}</div>
+        {% endif %}
+    </td>
+</tr>
 
-                <tr>
-                    <td>Phone</td>
-                    <td><input type="text" name="cphone" required></td>
-                </tr>
+<tr>
+    <td>Phone</td>
+    <td>
+        <input type="text" name="cphone" required>
+        {% if msg1 %}
+            <div style="color:red; font-size:13px;">{{ msg1 }}</div>
+        {% endif %}
+    </td>
+</tr>
 
                 <tr>
                     <td>Password</td>
